@@ -47,7 +47,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: IncrementButton(),
+      floatingActionButton: IncrementButton(
+        onPressed: () {
+          setState(() {
+            _counter++;
+          });
+        },
+      ),
     );
   }
 }
