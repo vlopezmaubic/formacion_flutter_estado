@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'button.dart';
+import 'timer_bloc.dart';
 
 void main() => runApp(MyApp());
 
@@ -29,25 +31,37 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
+    return BlocProvider<TimerBloc>(
+      create: (BuildContext context) => TimerBloc(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title),
         ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'You have pushed the button this many times:',
+              ),
+              BlocBuilder<TimerBloc, TimerBlocState>(
+                builder: (BuildContext context, TimerBlocState state) {
+                  if (state is LoadingTimerBlocState) {
+                    return CircularProgressIndicator();
+                  } else if (state is CounterTimerBlocState) {
+                    final int counter = state.counter;
+                    return Text(
+                      '$counter',
+                      style: Theme.of(context).textTheme.display1,
+                    );
+                  }
+                },
+              ),
+            ],
+          ),
+        ),
+        floatingActionButton: IncrementButton(),
       ),
-      floatingActionButton: IncrementButton(),
     );
   }
 }

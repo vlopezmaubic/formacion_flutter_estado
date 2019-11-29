@@ -20,7 +20,7 @@ class TimerBloc extends Bloc<ToggleTimerBlocEvent, TimerBlocState> {
 
 class ToggleTimerBlocEvent {}
 
-class TimerBlocState {}
+abstract class TimerBlocState {}
 
 class CounterTimerBlocState extends TimerBlocState {
   final int counter;
