@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'inherited_counter.dart';
 
 class HomePageBody extends StatelessWidget {
@@ -33,20 +34,26 @@ class _Top extends StatelessWidget {
 class _TopLeft extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('A'));
+    final int counter = Provider.of<int>(context);
+    return Center(child: Text('${counter - 1}'));
   }
 }
 
 class _TopRight extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('B'));
+    final int counter = Provider.of<int>(context);
+    return Center(child: Text('${counter + 1}'));
   }
 }
 
 class _Bottom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('C'));
+    return Consumer<int>(
+      builder: (BuildContext context, int counter, _) {
+        return Center(child: Text('$counter'));
+      },
+    );
   }
 }

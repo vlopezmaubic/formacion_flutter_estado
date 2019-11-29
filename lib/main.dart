@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'button.dart';
 import 'body.dart';
 import 'inherited_counter.dart';
@@ -27,7 +28,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int _counter = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +36,17 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: HomePageBody(),
-      floatingActionButton: IncrementButton(),
+      body: Provider<int>.value(
+        value: _counter,
+        child: HomePageBody(),
+      ),
+      floatingActionButton: IncrementButton(
+        onPressed: () {
+          setState(() {
+            _counter++;
+          });
+        },
+      ),
     );
   }
 }
