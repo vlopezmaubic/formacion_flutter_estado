@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'button.dart';
+import 'body.dart';
+import 'inherited_counter.dart';
 
 void main() => runApp(MyApp());
 
@@ -33,20 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
-        ),
-      ),
+      body: HomePageBody(),
       floatingActionButton: IncrementButton(),
     );
   }
